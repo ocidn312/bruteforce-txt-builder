@@ -4,12 +4,8 @@ import random
 
 class BuilderBrute:
     def __init__(self):
-        self.name_file = input("name file: ") + ".txt"
-        if input("use default letters? (y/n): ") == "y":
-            self.letters = "1234567890qwertyuiopasdfghjklzxcvbnm-_QWERTYUIOPASDFGHJKLZXCVBNM"
-        else:
-            self.letters = input("input new letters: ")
-        self.words = str(self.get_words()).split()
+        self.name_file = ""
+        self.letters = ""
         self.rejected = 0
 
     def create_txt(self) -> None:
@@ -44,15 +40,16 @@ class BuilderBrute:
                 print("Not Found")
 
     def main(self, now: int, now2) -> None:
+        words = str(self.get_words()).split()
         while True:
             word = self.get_word(now, now2)
-            if word in self.words or word[0] in ("-", "_"):
+            if word in words or word[0] in ("-", "_"):
                 print("rejected")
                 self.rejected += 1
                 os.system("title rejected: " + str(self.rejected))
             else:
                 self.write(word)
-                self.words.append(word)
+                words.append(word)
                 print(word)
 
 
@@ -62,5 +59,9 @@ if __name__ == '__main__':
         builder.checker()
         input("...")
     else:
-
+        builder.name_file = input("name file: ") + ".txt"
+        if input("use default letters? (y/n): ") == "y":
+            builder.letters = "1234567890qwertyuiopasdfghjklzxcvbnm-_QWERTYUIOPASDFGHJKLZXCVBNM"
+        else:
+            builder.letters = input("input new letters: ")
         builder.main(int(input("min: ")), int(input("max: ")))
