@@ -4,12 +4,15 @@ import random
 
 class BuilderBrute:
     def __init__(self):
-        self.letters = "1234567890qwertyuiopasdfghjklzxcvbnm-_QWERTYUIOPASDFGHJKLZXCVBNM"
         self.name_file = input("name file: ") + ".txt"
+        if input("use default letters? (y/n): ") == "y":
+            self.letters = "1234567890qwertyuiopasdfghjklzxcvbnm-_QWERTYUIOPASDFGHJKLZXCVBNM"
+        else:
+            self.letters = input("input new letters: ")
         self.words = str(self.get_words()).split()
         self.rejected = 0
 
-    def create_txt(self):
+    def create_txt(self) -> None:
         with open(self.name_file, "w"):
             pass
 
@@ -36,9 +39,9 @@ class BuilderBrute:
     def checker(self) -> None:
         with open(self.name_file, "r") as txt:
             if input("word: ") in txt.read().split():
-                print("Finded!")
+                print("Found!")
             else:
-                print("Not Finded(")
+                print("Not Found")
 
     def main(self, now: int, now2) -> None:
         while True:
@@ -55,8 +58,9 @@ class BuilderBrute:
 
 if __name__ == '__main__':
     builder = BuilderBrute()
-    if input("use checker? (y/n): ") == "y":
+    if input("use checker db? (y/n): ") == "y":
         builder.checker()
         input("...")
     else:
+
         builder.main(int(input("min: ")), int(input("max: ")))
